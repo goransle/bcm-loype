@@ -4,58 +4,45 @@
 <div id="container"></div>
 
 <script type="module">
-    import data from './loype.mjs';
+  import data from "./loype.mjs";
 
-console.log(data);
+  console.log(data);
 
-Highcharts.chart('container', {
+  Highcharts.chart("container", {
     chart: {
-        type: 'areaspline'
+      type: "areaspline",
+      zoomType: "x",
     },
     title: {
-        text: 'Løype'
+      text: "Løype",
     },
     exporting: {
-        sourceWidth: 1200,
+      sourceWidth: 1200,
     },
     xAxis: {
-        plotLines: 
-        [
-    3237,
-    4579,
-    5604,
-    8174,
-    9254,
-    12303,
-    15716,
-    17813,
-    19198,
-    21097
-].map((dist, i) =>{
-    return {
-        color: 'red',
-        value: dist,
-        width: 2,
-    }
-})
-
-        
+      plotLines: [
+        3237, 4579, 5604, 8174, 9254, 12303, 15716, 17813, 19198, 21097,
+      ].map((dist, i) => {
+        return {
+          color: "red",
+          value: dist,
+          width: 2,
+        };
+      }),
     },
     yAxis: {
-        title: {
-            text: 'Høyde (m)'
-        },
+      title: {
+        text: "Høyde (m)",
+      },
     },
 
-    series: [{
-        name: 'Distanse',
-        data: data.graphEle.map((elevation, i) =>{
-            return [
-                data.graphDist[i], 
-                elevation
-                ];
-        })
-    }]
-});
-
+    series: [
+      {
+        name: "Distanse",
+        data: data.graphEle.map((elevation, i) => {
+          return [data.graphDist[i], elevation];
+        }),
+      },
+    ],
+  });
 </script>
