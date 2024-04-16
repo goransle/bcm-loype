@@ -8,6 +8,34 @@
 
   console.log(data);
 
+  data.graphEle = data.graphEle.slice(12);
+
+  const times = [
+    "09:25",
+    "09:36",
+    "09:45",
+    "10:02",
+    "10:17",
+    "10:21",
+    "10:39",
+    "10:49",
+    "10:56",
+    "11:05",
+  ];
+
+  const runners = [
+    "Anaïs",
+    "Marita",
+    "Helga",
+    "Sigrid",
+    "Gøran",
+    "Gøran",
+    "Guro",
+    "Maria",
+    "???",
+    "Ferdinand",
+  ];
+
   Highcharts.chart("container", {
     chart: {
       type: "areaspline",
@@ -21,12 +49,51 @@
     },
     xAxis: {
       plotLines: [
-        3237, 4579, 5604, 8174, 9254, 12303, 15716, 17813, 19198, //21097,
+        3237,
+        4579,
+        5604,
+        8174,
+        9254,
+        12303,
+        15716,
+        17813,
+        19198, //21097,
       ].map((dist, i) => {
         return {
           color: "red",
           value: dist,
           width: 2,
+        };
+      }),
+      plotBands: [
+        [0, 3237],
+        [3237, 4579],
+        [4579, 5604],
+        [5604, 8174],
+        [8174, 9254],
+        [9254, 12303],
+        [12303, 15716],
+        [15716, 17813],
+        [17813, 19198],
+        [19198, 21097],
+      ].map(([from, to], i) => {
+        return {
+          from,
+          to,
+          color:
+            i % 2 === 0 ? "rgba(68, 170, 213, 0.1)" : "rgba(68, 170, 213, 0.2)",
+          label: {
+            text: `${runners[i]} <br>
+                ${to - from} m <br>
+                ${times[i]}
+                `,
+            verticalAlign: "middle",
+            y: 100,
+            style: {
+              fontSize: "10px",
+              zIndex: 10000,
+            },
+          },
         };
       }),
     },
