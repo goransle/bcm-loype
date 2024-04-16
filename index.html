@@ -3,12 +3,37 @@
 
 <div id="container"></div>
 
+<h2>Starts</h2>
+<table id="starts-container">
+    <theader>
+        <th> Approx start time</th>
+        <th> Start location </th>
+    </theader>
+    <tbody>
+    </tbody>
+</table>
+
 <script type="module">
   import data from "./loype.mjs";
 
   console.log(data);
 
   data.graphEle = data.graphEle.slice(12);
+
+  const starts = 
+[
+    {"name": "Bryggen", "latitude": 60.397151, "longitude": 5.322693},
+    {"name": "Gamle Bergen", "latitude": 60.418607, "longitude": 5.309794},
+    {"name": "BKK I Fjellveien", "latitude": 60.412389, "longitude": 5.327379},
+    {"name": "Mon Plaisir", "latitude": 60.405578, "longitude": 5.332230},
+    {"name": "Fjellveien", "latitude": 60.387741, "longitude": 5.349892},
+    {"name": "Svartediket", "latitude": 60.382659, "longitude": 5.365601},
+    {"name": "Helikopterplassen/Grønneviksøren", "latitude": 60.379743, "longitude": 5.346782},
+    {"name": "Nygårdsparken", "latitude": 60.383765, "longitude": 5.324301},
+    {"name": "Hurtigruteterminalen", "latitude": 60.394670, "longitude": 5.314391},
+    {"name": "Nordnesparken", "latitude": 60.399404, "longitude": 5.307366}
+];
+
 
   const times = [
     "09:25",
@@ -88,7 +113,7 @@
                 ${times[i]}
                 `,
             verticalAlign: "middle",
-            y: 100,
+            y: 90,
             style: {
               fontSize: "10px",
               zIndex: 10000,
@@ -112,4 +137,25 @@
       },
     ],
   });
+
+  const startsTable = document.querySelector('table tbody');
+    
+  starts.forEach((starts, i) => {
+
+    // Create a table row, add start time and location
+    const tr = document.createElement('tr');
+
+    [times[i], `<a href="https://maps.google.com/?q=${starts.latitude},${starts.longitude}"> ${starts.name}</a>`].forEach((datum=>{
+        const td =document.createElement('td');
+        td.innerHTML = datum;
+
+        tr.appendChild(td);
+        
+    }))
+
+    startsTable.appendChild(tr);
+
+
+  });
+
 </script>
